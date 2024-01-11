@@ -158,7 +158,7 @@
       url: https://docs.microsoft.com/en-us/azure/expressroute/monitor-expressroute#alerts
     - name: ExpressRoute KQL Queries
       url: https://docs.microsoft.com/en-us/azure/expressroute/monitor-expressroute#sample-kusto-queries
-- name: BitsInPerSecond #have the the gateway alert, so we dont need this granularity for ALZ pattern (for perhaps reliablity)
+- name: BitsInPerSecond
   description: Bits ingressing Azure per second
   type: Metric
   verified: false
@@ -177,13 +177,12 @@
     criterionType: StaticThresholdCriterion
     threshold: 800000000.0 #this would be dependant on the SKU, perhaps to see the kinda of SKU they may want to utilize
     autoMitigate: false
-    #adding references
     references:
       - name: Circuit Metrics examples
         url: https://learn.microsoft.com/en-us/azure/expressroute/expressroute-monitoring-metrics-alerts#circuits-metrics
       - name: ExpressRoute Gateway Connections
         url: https://learn.microsoft.com/en-us/azure/expressroute/expressroute-monitoring-metrics-alerts#expressroute-gateway-connections
-- name: BitsOutPerSecond #have the the gateway alert, so we dont need this granularity for ALZ pattern
+- name: BitsOutPerSecond
   description: Bits egressing Azure per second
   type: Metric
   verified: false
@@ -207,7 +206,7 @@
         url: https://learn.microsoft.com/en-us/azure/expressroute/expressroute-monitoring-metrics-alerts#circuits-metrics
       - name: ExpressRoute Gateway Connections
         url: https://learn.microsoft.com/en-us/azure/expressroute/expressroute-monitoring-metrics-alerts#expressroute-gateway-connections-in-bitsseconds
-- name: ArpAvailability #using ALZ threshold
+- name: ArpAvailability
   description: ARP Availability from MSEE towards all peers.
   type: Metric
   verified: false
@@ -226,7 +225,6 @@
     criterionType: StaticThresholdCriterion
     threshold: 100.0
     autoMitigate: false
-    #adding references
   references:
     - name: Monitor ExpressRoute Alerts
       url: https://docs.microsoft.com/en-us/azure/expressroute/monitor-expressroute#alerts
@@ -248,11 +246,10 @@
     evaluationFrequency: PT1M
     timeAggregation: Average
     operator: GreaterThan
-    criterionType: StaticThresholdCriterion # i would prefer to keep the alert dynamic as laided out in the ALZ reccomendation, see line 80.
+    criterionType: StaticThresholdCriterion
     threshold: 0.0
     autoMitigate: false
-- name: QosDropBitsOutPerSecond #using ALZ threshold
-  #revisit these as we go back over these.
+- name: QosDropBitsOutPerSecond
   description: Egress bits of data dropped per second
   type: Metric
   verified: false
@@ -268,16 +265,15 @@
     evaluationFrequency: PT1M
     timeAggregation: Average
     operator: GreaterThan
-    criterionType: StaticThresholdCriterion # in this auto generated reccomendation I think that we should stick to Dynamic threshold as laided out from the ALZ reccomendation, see line 115
+    criterionType: StaticThresholdCriterion
     threshold: 0.0
     autoMitigate: false
-    #adding references
     references:
       - name: Monitor ExpressRoute Alerts
         url: https://docs.microsoft.com/en-us/azure/expressroute/monitor-expressroute#alerts
       - name: ExpressRoute KQL Queries
     url: https://docs.microsoft.com/en-us/azure/expressroute/monitor-expressroute#sample-kusto-queries
-- name: globalreachbitsinpersecond #Consider for ALZ pattern... not high on the list but a nice eventual addition.
+- name: globalreachbitsinpersecond
   description:
   type: Metric
   verified: false
@@ -299,7 +295,7 @@
   references:
     - name: View Global Reach Metrics
       url: https://learn.microsoft.com/en-us/azure/expressroute/expressroute-monitoring-metrics-alerts#expressroute-metrics
-- name: globalreachbitsoutpersecond #Consider for ALZ pattern... not high on the list but a nice eventual addition.
+- name: globalreachbitsoutpersecond
   description:
   type: Metric
   verified: false
@@ -327,7 +323,7 @@
   verified: false
   visible: false
   tags:
-    - auto-generateD
+    - auto-generated
     - agc-13
   severity:
   windowSize:
@@ -344,9 +340,8 @@
     timeAggregation: Average
     operator: LessThan
     criterionType: StaticThresholdCriterion
-    threshold: 0.0l #would assume this would be a multiple of one,
+    threshold: 0.0l
     autoMitigate: false
-    # adding references
     references:
       - name: FastPath Routes Count (at circuit level)
     url: https://learn.microsoft.com/en-us/azure/expressroute/expressroute-monitoring-metrics-alerts#fastpath-routes-count-at-circuit-level
